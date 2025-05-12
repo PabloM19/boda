@@ -33,10 +33,17 @@
     </div>
 
     <div class="bg-white shadow-md rounded-xl p-4 w-full max-w-md space-y-4">
-      <h2 class="text-xl font-semibold text-blue-500">💌 Donativos</h2>
-      <p>Si quieres ayudarnos con nuestra luna de miel:</p>
-      <p class="bg-gray-100 rounded-lg p-2 text-center font-mono">ESXXXXXXXXXXXX</p>
-    </div>
+        <h2 class="text-xl font-semibold text-blue-500">💌 Donativos</h2>
+        <p>Si quieres ayudarnos con nuestra luna de miel:</p>
+        <div class="flex items-center justify-between bg-gray-100 rounded-lg p-2">
+          <span id="numeroCuenta" class="font-mono text-sm select-all">
+            ES54 0182 0526 9802 0159 2891
+          </span>
+          <button id="btnCopiar" class="ml-2 text-blue-600 font-semibold hover:underline">
+            Copiar
+          </button>
+        </div>
+      </div>      
 
     <div class="bg-white shadow-md rounded-xl p-4 w-full max-w-md space-y-4">
         <h2 class="text-xl font-semibold text-blue-500">🎉 Confirmación de asistencia</h2>
@@ -126,5 +133,22 @@
       }
     });
   </script>  
+  <script>
+    const btnCopiar = document.getElementById('btnCopiar');
+    const numeroCuenta = document.getElementById('numeroCuenta');
+  
+    btnCopiar.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(numeroCuenta.textContent.trim());
+        const textoOriginal = btnCopiar.textContent;
+        btnCopiar.textContent = '¡Copiado!';
+        setTimeout(() => {
+          btnCopiar.textContent = textoOriginal;
+        }, 2000);
+      } catch (err) {
+        alert('No se pudo copiar. Puedes copiarlo manualmente.');
+      }
+    });
+  </script>
 </body>
 </html>
