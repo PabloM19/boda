@@ -1,6 +1,0 @@
-{
-    "rewrites": [
-      { "source": "/galeriavirtual", "destination": "/galeriavirtual.html" }
-    ]
-  }
-  
