@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url('/assets/fondo.png');
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+    opacity: 0.15; /* 👈 Aquí ajustas la opacidad */
+    z-index: -1;
+  }
+  
