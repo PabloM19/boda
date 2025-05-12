@@ -24,7 +24,7 @@ body {
   .boton-fotos {
     display: block;
     width: 100%;
-    max-width: 320px;
+    max-width: 250px;
     margin: 1.25rem auto 0;
     background-color: #2563eb; /* Azul tipo Tailwind (blue-600) */
     color: white;
