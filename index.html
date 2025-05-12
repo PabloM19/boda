@@ -39,68 +39,92 @@
     </div>
 
     <div class="bg-white shadow-md rounded-xl p-4 w-full max-w-md space-y-4">
-      <h2 class="text-xl font-semibold text-blue-500">🎉 Confirmación de asistencia</h2>
-
-      <form id="formularioConfirmacion" class="space-y-4">
-        <div>
-          <label class="block mb-1 font-medium">Nombre:</label>
-          <input name="nombre" required class="w-full border border-gray-300 rounded p-2" />
+        <h2 class="text-xl font-semibold text-blue-500">🎉 Confirmación de asistencia</h2>
+      
+        <!-- FORMULARIO -->
+        <form id="formularioConfirmacion" class="space-y-4">
+          <div>
+            <label class="block mb-1 font-medium">Nombre:</label>
+            <input name="nombre" required class="w-full border border-gray-300 rounded p-2" />
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">¿Asistirás?</label>
+            <select name="asistencia" required class="w-full border border-gray-300 rounded p-2">
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 font-medium">¿Tienes alguna intolerancia o alergia?</label>
+            <textarea name="intolerancias" rows="3" class="w-full border border-gray-300 rounded p-2"></textarea>
+          </div>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Enviar confirmación
+          </button>
+        </form>
+      
+        <!-- SPINNER -->
+        <div id="procesando" class="hidden flex items-center justify-center space-x-2 text-blue-600 font-medium">
+          <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          <span>Procesando solicitud...</span>
         </div>
-        <div>
-          <label class="block mb-1 font-medium">¿Asistirás?</label>
-          <select name="asistencia" required class="w-full border border-gray-300 rounded p-2">
-            <option value="Sí">Sí</option>
-            <option value="No">No</option>
-          </select>
-        </div>
-        <div>
-          <label class="block mb-1 font-medium">¿Tienes alguna intolerancia o alergia?</label>
-          <textarea name="intolerancias" rows="3" class="w-full border border-gray-300 rounded p-2"></textarea>
-        </div>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          Enviar confirmación
-        </button>
-      </form>
-
-      <div id="mensajeRespuesta" class="mt-4 text-center font-semibold text-green-600 hidden"></div>
+      
+        <!-- MENSAJE FINAL -->
+        <div id="mensajeRespuesta" class="mt-4 text-center font-semibold text-green-600 hidden"></div>
     </div>
+      
 
   </div>
 
   <script>
     const form = document.getElementById('formularioConfirmacion');
     const mensaje = document.getElementById('mensajeRespuesta');
-
+    const procesando = document.getElementById('procesando');
+  
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
+  
       const formData = new FormData(form);
       const data = new URLSearchParams(formData);
       const asistencia = formData.get('asistencia');
-
+  
+      // Mostrar spinner
+      procesando.classList.remove('hidden');
+      mensaje.classList.add('hidden');
+      form.classList.add('hidden');
+  
       try {
         const response = await fetch('/api/confirmacion', {
           method: 'POST',
           body: data
         });
-
+  
+        // Esperar al menos 2.5 segundos
+        await new Promise(resolve => setTimeout(resolve, 2500));
+  
         if (response.ok) {
-          form.classList.add('hidden');
-
           if (asistencia === 'Sí') {
             mensaje.textContent = '¡Genial, gracias por la información! ¡Nos vemos en la boda!';
           } else {
             mensaje.textContent = '¡No pasa nada! ¡Nos vemos en otra ocasión!';
           }
-
+  
           mensaje.classList.remove('hidden');
         } else {
           alert('Hubo un error al enviar el formulario. Inténtalo de nuevo más tarde.');
+          form.classList.remove('hidden');
         }
+  
       } catch (err) {
         alert('Ocurrió un error de red. Revisa tu conexión e intenta de nuevo.');
+        form.classList.remove('hidden');
+      } finally {
+        procesando.classList.add('hidden');
       }
     });
-  </script>
+  </script>  
 </body>
 </html>
