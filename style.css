@@ -16,7 +16,7 @@ body {
     background-size: cover;
     background-repeat: repeat;
     background-position: center;
-    opacity: 0.15; /* 👈 Ajusta aquí lo difuminado */
+    opacity: 0.05; /* 👈 Ajusta aquí lo difuminado */
     z-index: -1;
     pointer-events: none;
   }
