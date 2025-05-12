@@ -25,13 +25,13 @@ body {
     display: block;
     width: 100%;
     max-width: 320px;
-    margin: 2rem auto 0;
+    margin: 1.25rem auto 0;
     background-color: #2563eb; /* Azul tipo Tailwind (blue-600) */
     color: white;
-    font-size: 1.125rem; /* 18px */
+    font-size: 1rem; /* 18px */
     font-weight: 600;
     text-align: center;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
     border-radius: 0.75rem; /* 12px */
     text-decoration: none;
   }
