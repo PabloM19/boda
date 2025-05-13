@@ -24,8 +24,8 @@ export default async function handler(req, res) {
   });
 
   const mailOptions = {
-    from: 'pmoleromarin@gmail.com',
-    to: 'pmoleromarin@gmail.com',
+    from: 'pmolero@emebe.es',
+    to: 'pmolero@emebe.es',
     subject: `🎉 Confirmación de ${nombre}`,
     text: `Nombre: ${nombre}\nAsistencia: ${asistencia}\nIntolerancias/Alergias: ${intolerancias || 'Ninguna'}`
   };
