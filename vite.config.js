@@ -4,8 +4,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: './index.html',
-        galeriavirtual: './galeriavirtual.html'
+        main: './index.html'
       }
     }
   }
